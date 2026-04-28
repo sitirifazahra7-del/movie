@@ -8,7 +8,7 @@ class MovieRepository
 {
     public function getAll()
     {
-    return Movie::paginate(6); // bebas jumlahnya
+    return Movie::paginate(6); 
     }
 
     public function findById($id)

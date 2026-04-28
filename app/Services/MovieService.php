@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services; // SESUAI FOLDER: Service
+namespace App\Services;
 
-use App\Repositories\MovieRepository; // SESUAI FOLDER: Repository
+use App\Repositories\MovieRepository; 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
