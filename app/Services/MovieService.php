@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services; // SESUAI FOLDER: Service
 
-use App\Repositories\MovieRepository;
+use App\Repositories\MovieRepository; // SESUAI FOLDER: Repository
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
@@ -18,25 +18,24 @@ class MovieService
     public function storeMovie(array $data, $file = null)
     {
         if ($file) {
-            $data['foto_sampul'] = $this->handleUpload($file);
+            $data['foto_sampul'] = $this->uploadImage($file);
         }
         return $this->movieRepo->create($data);
     }
 
     public function updateMovie($id, array $data, $file = null)
     {
-        $movie = $this->movieRepo->findById($id);
         if ($file) {
-            // Hapus foto lama
-            if (File::exists(public_path('images/' . $movie->foto_sampul))) {
+            $movie = $this->movieRepo->findById($id);
+            if ($movie->foto_sampul && File::exists(public_path('images/' . $movie->foto_sampul))) {
                 File::delete(public_path('images/' . $movie->foto_sampul));
             }
-            $data['foto_sampul'] = $this->handleUpload($file);
+            $data['foto_sampul'] = $this->uploadImage($file);
         }
         return $this->movieRepo->update($id, $data);
     }
 
-    private function handleUpload($file)
+    private function uploadImage($file)
     {
         $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
         $file->move(public_path('images'), $fileName);

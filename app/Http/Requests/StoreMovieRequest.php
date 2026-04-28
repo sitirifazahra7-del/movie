@@ -22,9 +22,12 @@ class StoreMovieRequest extends FormRequest
    public function rules(): array
 {
     return [
+        'id' => 'required|string',
         'judul' => 'required|string|max:255',
-        'sutradara' => 'required|string',
-        'tahun_terbit' => 'required|integer',
+        'category_id' => 'required|exists:categories,id',
+        'sinopsis' => 'required|string',
+        'tahun' => 'required|integer',
+        'pemain' => 'required|string',
         'foto_sampul' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
     ];
 }

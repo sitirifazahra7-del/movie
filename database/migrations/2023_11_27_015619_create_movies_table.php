@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('sinopsis');
             $table->integer('tahun');
             $table->string('pemain');
-            $table->string('foto_sampul');
+            $table->string('foto_sampul')->nullable();
             $table->timestamps();
             $table->primary('id');
         });

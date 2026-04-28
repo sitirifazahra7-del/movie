@@ -8,7 +8,7 @@ class MovieRepository
 {
     public function getAll()
     {
-        return Movie::latest()->paginate(10);
+    return Movie::paginate(6); // bebas jumlahnya
     }
 
     public function findById($id)
@@ -23,14 +23,14 @@ class MovieRepository
 
     public function update($id, array $data)
     {
-        $movie = Movie::findOrFail($id);
+        $movie = $this->findById($id);
         $movie->update($data);
         return $movie;
     }
 
     public function delete($id)
     {
-        $movie = Movie::findOrFail($id);
+        $movie = $this->findById($id);
         return $movie->delete();
     }
 }
